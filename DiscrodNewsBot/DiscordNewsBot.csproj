@@ -1,0 +1,78 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>DiscordNewsBot</AssemblyName>
+    <RootNamespace>DiscordNewsBot</RootNamespace>
+    <Version>1.0.0</Version>
+    <Authors>Geckon01</Authors>
+    <Company />
+    <Product>DiscordNewsBot</Product>
+    <PackageLicenseExpression />
+    <PackageLicenseFile>license.md</PackageLicenseFile>
+    <ApplicationIcon></ApplicationIcon>
+    <Platforms>AnyCPU;x86</Platforms>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\Geckon01\source\repos\DiscrodNewsBot\DiscrodNewsBot\DiscordNewsBot.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <DocumentationFile>C:\Users\Geckon01\source\repos\DiscrodNewsBot\DiscrodNewsBot\DiscordNewsBot.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Localization\**" />
+    <EmbeddedResource Remove="Localization\**" />
+    <None Remove="Localization\**" />
+    <None Include="license.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Config\config.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DSharpPlus" Version="3.2.3" />
+    <PackageReference Include="DSharpPlus.CommandsNext" Version="3.2.3" />
+    <PackageReference Include="DSharpPlus.Interactivity" Version="3.2.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="YoutubeExplode" Version="4.7.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Config\config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Resource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Resource.ru-RU.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.ru-RU.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties config_4config_1json__JsonSchema="http://json-schema.org/draft-04/schema" /></VisualStudio></ProjectExtensions>
+
+</Project>

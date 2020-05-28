@@ -1,0 +1,12 @@
+{
+  "Token": "",
+  "TimeToNotRelevant": 6,
+  "CommandPrefix": "/",
+  "ClientId": 000000000000000000,
+  "BotPermissions": 67365888,
+  "ChannelList": [],
+  "MutedServers": [],
+  "ObserveCheckInterval": 1800000,
+  "ChatCultures": {},
+  "SupportedCultures": [ "ru-RU", "en-US" ]
+}

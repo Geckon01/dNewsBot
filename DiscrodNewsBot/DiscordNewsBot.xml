@@ -1,0 +1,417 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DiscordNewsBot</name>
+    </assembly>
+    <members>
+        <member name="T:DiscordNewsBot.Clients.IClient">
+            <summary>
+            Interface for some external service client
+            NOTE: Implement with singleton pattern
+            </summary>
+        </member>
+        <member name="M:DiscordNewsBot.Clients.IClient.Search(System.String,System.Int32)">
+            <summary>
+            Searches on service
+            </summary>
+            <param name="query">Search query</param>
+            <param name="limit"></param>
+            <returns>Link(s) to found information/page</returns>
+        </member>
+        <member name="M:DiscordNewsBot.Clients.IClient.SearchChannel(System.String)">
+            <summary>
+            Searches information channel on service
+            </summary>
+            <param name="query">Search query</param>
+            <returns>Link(s) to found information/page</returns>
+        </member>
+        <member name="M:DiscordNewsBot.Clients.IClient.SearchChannelId(System.String)">
+            <summary>
+            Searches information channel on service
+            </summary>
+            <param name="query"></param>
+            <returns>Information channel dictionary - [name:id]</returns>
+        </member>
+        <member name="M:DiscordNewsBot.Clients.IClient.GetLast(System.String)">
+            <summary>
+            Searches new information on service
+            </summary>
+            <param name="channelId">Information channel id or link</param>
+            <returns>New information object</returns>
+        </member>
+        <member name="M:DiscordNewsBot.Clients.IClient.AddLast(System.UInt64,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="chatId"></param>
+            <param name="videoId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DiscordNewsBot.Clients.YouTubeClient">
+            <inheritdoc/>
+        </member>
+        <member name="M:DiscordNewsBot.Config.ExtensionMethods.FastSplit``1(System.Collections.Generic.List{``0},System.Int32)">
+            <summary>
+            Split list to chunks 
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="nSize">Size of chunk</param>
+            <returns></returns>
+        </member>
+        <member name="M:DiscordNewsBot.Config.ExtensionMethods.ContainsKey(System.Collections.Generic.List{DiscordNewsBot.Entities.ChatChannel},System.UInt64)">
+            <summary>
+            Check if chat channel list contains key
+            </summary>
+            <param name="chatChannels"></param>
+            <param name="id">Text chat channel id</param>
+            <returns></returns>
+        </member>
+        <member name="M:DiscordNewsBot.Config.ExtensionMethods.ContainsChannel(System.Collections.Generic.List{DiscordNewsBot.Entities.ChatChannel},System.UInt64,System.String)">
+            <summary>
+            Check if chat channel list contains channel
+            </summary>
+            <param name="chatChannels"></param>
+            <param name="chatId">Text chat channel id</param>
+            <param name="channelName">Text channel name</param>
+            <returns></returns>
+        </member>
+        <member name="M:DiscordNewsBot.Config.ExtensionMethods.GetCultureInfo(DSharpPlus.Entities.DiscordChannel)">
+            <summary>
+            Get text channel culture if provided
+            </summary>
+            <param name="chatChannel"></param>
+            <returns>Text channel culture or default culture if not provided</returns>
+        </member>
+        <member name="T:DiscordNewsBot.Config.SettingsManager">
+            <summary>
+            Stores all bot settings
+            </summary>
+        </member>
+        <member name="F:DiscordNewsBot.Config.SettingsManager._instance">
+            <summary>
+            Singleton instance
+            </summary>
+        </member>
+        <member name="F:DiscordNewsBot.Config.SettingsManager.ConfigFilePath">
+            <summary>
+            Path to json config file
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Config.SettingsManager.Token">
+            <summary>
+            Discord token to access bot app
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Config.SettingsManager.TimeToNotRelevant">
+            <summary>
+            Maximum time when any observing service information is relevant
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Config.SettingsManager.CommandPrefix">
+            <summary>
+            Bot command prefix
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Config.SettingsManager.ClientId">
+            <summary>
+            App client_id.
+            Is used for bot invite link
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Config.SettingsManager.BotPermissions">
+            <summary>
+            Bot permissions integer.
+            Is used for bot invite link
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Config.SettingsManager.ChannelList">
+            <summary>
+            Saved observing channels list
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Config.SettingsManager.MutedServers">
+            <summary>
+            Muted discord chats.
+            Will not receive any notification
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Config.SettingsManager.ObserveCheckInterval">
+            <summary>
+            Interval for checking new info on services in ms
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Config.SettingsManager.ChatCultures">
+            <summary>
+            Some discord chat selected cultures
+            </summary>
+        </member>
+        <member name="M:DiscordNewsBot.Config.SettingsManager.#ctor">
+            <summary>
+            Private constructor due to singleton pattern
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Config.SettingsManager.Config">
+            <summary>
+            Returns actual bot config
+            </summary>
+        </member>
+        <member name="M:DiscordNewsBot.Config.SettingsManager.Save">
+            <summary>
+            Stores config to json file on disk
+            </summary>
+        </member>
+        <member name="M:DiscordNewsBot.Config.SettingsManager.Load">
+            <summary>
+            Loads config from json file on disk
+            </summary>
+        </member>
+        <member name="F:DiscordNewsBot.Entities.ChatChannel.DiscordChatId">
+            <summary>
+            Discord text channel id
+            </summary>
+        </member>
+        <member name="F:DiscordNewsBot.Entities.ChatChannel.ServiceChannel">
+            <summary>
+            Notification service channel
+            </summary>
+        </member>
+        <member name="F:DiscordNewsBot.Entities.ChatChannel.ServiceType">
+            <summary>
+            Notification service type
+            </summary>
+        </member>
+        <member name="F:DiscordNewsBot.Entities.ChatChannel.ServiceChannelName">
+            <summary>
+            Notification service name
+            </summary>
+        </member>
+        <member name="F:DiscordNewsBot.Entities.EmojiesList.Numbers">
+            <summary>
+            Numeric emojies from 0 to 9
+            </summary>
+        </member>
+        <member name="M:DiscordNewsBot.Entities.EmojiesList.GetArrayFormNumber(System.Int32)">
+            <summary>
+            Split any integer to array of numbers
+            </summary>
+            <param name="num"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DiscordNewsBot.Entities.EmojiesList.GetEmojiNumFromInt(System.Int32)">
+            <summary>
+            Get emojie number from integer
+            </summary>
+            <param name="num"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DiscordNewsBot.Helpers.StringHelper.CalcHashMd5(System.String)">
+            <summary>
+            Get md5 hash string from any string
+            </summary>
+            <param name="inputString"></param>
+            <returns></returns>
+        </member>
+        <member name="P:DiscordNewsBot.Program.Discord">
+            <summary>
+            Discord DSharpPlus client
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Program.StartTime">
+            <summary>
+            Program start time
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Program.YouTubeObserver">
+            <summary>
+            YouTubeServer observer
+            </summary>
+        </member>
+        <member name="F:DiscordNewsBot.Program._commands">
+            <summary>
+            DSharPLusComandsModule
+            </summary>
+        </member>
+        <member name="F:DiscordNewsBot.Program.Tag">
+            <summary>
+            App tag for logging
+            </summary>
+        </member>
+        <member name="M:DiscordNewsBot.Program.MainAsync">
+            <summary>
+            Main program method
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DiscordNewsBot.Program.Log(System.String,System.String,DSharpPlus.LogLevel)">
+            <summary>
+            Wrap for logging some message
+            </summary>
+            <param name="application">Some context</param>
+            <param name="message">Message to log</param>
+            <param name="level">Log level from DSharpPlus</param>
+        </member>
+        <member name="M:DiscordNewsBot.Program.Log(System.String,System.Exception,DSharpPlus.LogLevel)">
+            <summary>
+            Wrap for logging some error
+            </summary>
+            <param name="application">Some context</param>
+            <param name="ex">Exception to log</param>
+            <param name="level">Log level from DSharpPlus</param>
+        </member>
+        <member name="M:DiscordNewsBot.Program.ForceCheck">
+            <summary>
+            Awaking all the observers threads
+            </summary>
+        </member>
+        <member name="M:DiscordNewsBot.Program.Shutdown">
+            <summary>
+            Shutting down the bot properly by saving all cached values
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DiscordNewsBot.Program.GlobalUnhandledExceptionHandler(System.Object,System.UnhandledExceptionEventArgs)">
+            <summary>
+            Handler for unhalder exceptions
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:DiscordNewsBot.Resources.Resource">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.add_channel_already_exist_text">
+            <summary>
+              Ищет локализованную строку, похожую на :x: This channel is already in notification list :x: .
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.add_channel_exception_text">
+            <summary>
+              Ищет локализованную строку, похожую на Error durin adding channel! :x: .
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.add_channel_not_found_text">
+            <summary>
+              Ищет локализованную строку, похожую на Channel not found! :x: .
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.add_channel_success_text">
+            <summary>
+              Ищет локализованную строку, похожую на Chennel added succesfully! :white_check_mark: .
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.bot_uptime_text">
+            <summary>
+              Ищет локализованную строку, похожую на Current uptime: {0}.
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.channels_list_empty_text">
+            <summary>
+              Ищет локализованную строку, похожую на You have not yet added any channels to the notification list..
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.deleted_messages_text">
+            <summary>
+              Ищет локализованную строку, похожую на Deleted {0} messages. :white_check_mark: .
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.force_check_text">
+            <summary>
+              Ищет локализованную строку, похожую на Force check new messages.
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.joinserver_link_text">
+            <summary>
+              Ищет локализованную строку, похожую на Use this link to invete bot to your server.
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.joinserver_link_to_user">
+            <summary>
+              Ищет локализованную строку, похожую на Bot invite link sent to user :x: .
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.lang_selected_text">
+            <summary>
+              Ищет локализованную строку, похожую на Language successfully changed to English :x: .
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.notifications_status_text">
+            <summary>
+              Ищет локализованную строку, похожую на Notifications {0}.
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.page_text">
+            <summary>
+              Ищет локализованную строку, похожую на Page {0}.
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.shutdown_time_text">
+            <summary>
+              Ищет локализованную строку, похожую на Bot will shutdown in {0} min..
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.statistics_text">
+            <summary>
+              Ищет локализованную строку, похожую на .
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.youtube_channel_deleted_text">
+            <summary>
+              Ищет локализованную строку, похожую на Channel successfully deleted :white_check_mark: .
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.youtube_delete_channel_select_text">
+            <summary>
+              Ищет локализованную строку, похожую на Input number of channel whic you want to delete..
+            </summary>
+        </member>
+        <member name="P:DiscordNewsBot.Resources.Resource.youtube_notify_text">
+            <summary>
+              Ищет локализованную строку, похожую на  @here, New video on channel «{0}» https://www.youtube.com/watch?v={1}.
+            </summary>
+        </member>
+        <member name="F:DiscordNewsBot.Threading.BaseObserver._observerThread">
+            <summary>
+            Service observing thread itself
+            </summary>
+        </member>
+        <member name="F:DiscordNewsBot.Threading.BaseObserver._threadTimer">
+            <summary>
+            Thread timer.
+            It'll set autresetevent to signaled every n interval.
+            </summary>
+        </member>
+        <member name="M:DiscordNewsBot.Threading.BaseObserver.Start">
+            <summary>
+            Starting observing thread
+            </summary>
+        </member>
+        <member name="M:DiscordNewsBot.Threading.BaseObserver.Awake(System.Object)">
+            <summary>
+            Waking up observing thread to check for new notification
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:DiscordNewsBot.Threading.BaseObserver.ObservingThread">
+            <summary>
+            Observing thread itself
+            </summary>
+        </member>
+        <member name="T:DiscordNewsBot.Threading.YouTubeObserver">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>
