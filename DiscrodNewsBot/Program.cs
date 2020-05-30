@@ -11,7 +11,6 @@ namespace DiscordNewsBot
 {
     internal class Program
     {
-
         /// <summary>
         /// Discord DSharpPlus client
         /// </summary>

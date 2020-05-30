@@ -42,7 +42,7 @@ namespace DiscordNewsBot.Commands
             await interactivity.SendPaginatedMessage(ctx.Channel, ctx.User, resultPages, TimeSpan.FromMinutes(5), TimeoutBehaviour.Delete);
         }
 
-        [Command("add"), Description("Searches and add YouTube channel to notification list")]
+        [Command("add"), Description("Searches and add YouTube channel to notification list"), RequireUserPermissions(DSharpPlus.Permissions.Administrator)]
         public async Task AddChannel(CommandContext ctx, [Description("Channel name")]params string[] channelName)
         {
             await ctx.TriggerTypingAsync();
@@ -81,7 +81,7 @@ namespace DiscordNewsBot.Commands
             await ctx.RespondAsync(Resource.ResourceManager.GetString("add-channel-success-text", ctx.Channel.GetCultureInfo()));
         }
 
-        [Command("del"), Description("Remove YouTube channel from notifications")]
+        [Command("del"), Description("Remove YouTube channel from notifications"), RequireUserPermissions(DSharpPlus.Permissions.Administrator)]
         public async Task RemoveChannel(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
