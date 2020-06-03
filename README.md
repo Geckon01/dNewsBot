@@ -1,4 +1,4 @@
-# dNewBot
+# dNewsBot
 
 [![Build status](https://ci.appveyor.com/api/projects/status/xxq6xbasew5l5o2d/branch/master?svg=true)](https://ci.appveyor.com/project/Geckon01/dnewsbot/branch/master)
 [![License](https://img.shields.io/github/license/Geckon01/dNewsBot)](https://github.com/Geckon01/dNewsBot/blob/master/LICENSE)
