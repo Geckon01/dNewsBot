@@ -19,27 +19,36 @@ namespace DiscordNewsBot.Commands
         [Command("search"), Description("Searches some video on Youtube")]
         public async Task Search(CommandContext ctx, [Description("Search query")]params string[] query)
         {
-            await ctx.TriggerTypingAsync();
-            var interactivity = ctx.Client.GetInteractivityModule();
-
-            var searchResult = await YouTubeClient.GetInstance().Search(string.Join(" ", query), 25);
-            var resultPages = new List<Page>();
-            foreach (var searchChunk in searchResult.FastSplit(5))
+            try
             {
-                var page = new Page
+                await ctx.TriggerTypingAsync();
+                var interactivity = ctx.Client.GetInteractivityModule();
+
+                var searchResult = await YouTubeClient.GetInstance().Search(string.Join(" ", query), 10);
+                var resultPages = new List<Page>();
+                foreach (var searchChunk in searchResult.FastSplit(1))
                 {
-                    Embed = new DiscordEmbedBuilder
+                    var linkAndThumbnails = searchChunk[0].Split(";");
+                    var page = new Page
                     {
-                        Title = string.Format(
-                            Resource.ResourceManager.GetString("page-text", ctx.Channel.GetCultureInfo()),
-                            resultPages.Count + 1),
-                        Description = string.Join("", searchChunk)
-                    }
-                };
-                resultPages.Add(page);
+                        Embed = new DiscordEmbedBuilder
+                        {
+                            Title = string.Format(
+                                Resource.ResourceManager.GetString("page-text", ctx.Channel.GetCultureInfo()),
+                                resultPages.Count + 1),
+                            Description = linkAndThumbnails[0],
+                            ImageUrl = linkAndThumbnails.Last()
+                        }
+                    };
+                    resultPages.Add(page);
+                }
+
+                await interactivity.SendPaginatedMessage(ctx.Channel, ctx.User, resultPages, TimeSpan.FromMinutes(5), TimeoutBehaviour.Delete);
             }
-            
-            await interactivity.SendPaginatedMessage(ctx.Channel, ctx.User, resultPages, TimeSpan.FromMinutes(5), TimeoutBehaviour.Delete);
+            catch (Exception e)
+            {
+
+            }
         }
 
         [Command("add"), Description("Searches and add YouTube channel to notification list"), RequireUserPermissions(DSharpPlus.Permissions.Administrator)]

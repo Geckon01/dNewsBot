@@ -56,7 +56,7 @@ namespace DiscordNewsBot.Clients
             limit = limit < searchResult.Count ? limit : searchResult.Count;
             for (var i = 0; i < limit; i++)
             {
-                videosBuilder.Add(string.Format("{0} — https://www.youtube.com/watch?v={1}{2}{2}", searchResult[i].Title, searchResult[i].Id, Environment.NewLine));
+                videosBuilder.Add(string.Format("{0} — https://www.youtube.com/watch?v={1};{2}{3}{3}", searchResult[i].Title, searchResult[i].Id, searchResult[i].Thumbnails.StandardResUrl, Environment.NewLine));
             }
             return videosBuilder;
         }
