@@ -34,6 +34,15 @@ namespace DiscordNewsBot.Threading
         }
 
         /// <summary>
+        /// Stop observing thread
+        /// </summary>
+        public void Stop()
+        {
+            _observerThread.Abort();
+            _threadTimer.Dispose();
+        }
+
+        /// <summary>
         /// Waking up observing thread to check for new notification
         /// </summary>
         /// <param name="obj"></param>

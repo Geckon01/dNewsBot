@@ -144,6 +144,7 @@ namespace DiscordNewsBot
             Log(Tag, "Shutdown command received, now shutting down!");
             await Discord.UpdateStatusAsync(null, DSharpPlus.Entities.UserStatus.Offline);
             await Discord.DisconnectAsync();
+            YouTubeObserver.Stop();
             Environment.Exit(0);
         }
 

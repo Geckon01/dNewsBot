@@ -399,6 +399,11 @@
             Starting observing thread
             </summary>
         </member>
+        <member name="M:DiscordNewsBot.Threading.BaseObserver.Stop">
+            <summary>
+            Stop observing thread
+            </summary>
+        </member>
         <member name="M:DiscordNewsBot.Threading.BaseObserver.Awake(System.Object)">
             <summary>
             Waking up observing thread to check for new notification
