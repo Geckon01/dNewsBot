@@ -45,9 +45,9 @@ namespace DiscordNewsBot.Commands
 
                 await interactivity.SendPaginatedMessage(ctx.Channel, ctx.User, resultPages, TimeSpan.FromMinutes(5), TimeoutBehaviour.Delete);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-
+                Program.Log("Error during yotube video search", ex, DSharpPlus.LogLevel.Warning);
             }
         }
 
