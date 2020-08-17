@@ -4,7 +4,7 @@ using System;
 using System.Threading.Tasks;
 using DiscordNewsBot.Config;
 using DSharpPlus;
-using YoutubeExplode.Models;
+using YoutubeExplode.Videos;
 
 namespace DiscordNewsBot.Threading
 {

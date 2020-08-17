@@ -5,6 +5,7 @@ using DiscordNewsBot.Config;
 using YoutubeExplode;
 using DiscordNewsBot.Helpers;
 using DSharpPlus;
+using YoutubeExplode.Videos;
 
 namespace DiscordNewsBot.Clients
 {
@@ -50,7 +51,7 @@ namespace DiscordNewsBot.Clients
         
         public async Task<List<string>> Search(string query, int limit = 3)
         {
-            var searchResult = await _youtubeService.SearchVideosAsync(query, 1);
+            var searchResult = await _youtubeService.Search.GetVideosAsync(query);
             var videosBuilder = new List<string>();
 
             limit = limit < searchResult.Count ? limit : searchResult.Count;
@@ -62,10 +63,10 @@ namespace DiscordNewsBot.Clients
         }
         public async Task<Dictionary<string, string>> SearchChannel(string query)
         {
-            var videoSearchResult = await _youtubeService.SearchVideosAsync(query, 1);
+            var videoSearchResult = await _youtubeService.Search.GetVideosAsync(query, 0, 1);
             var channelList = new Dictionary<string, string>();
 
-            var foundChannel = await _youtubeService.GetVideoAuthorChannelAsync(videoSearchResult[0].Id);
+            var foundChannel = await _youtubeService.Channels.GetByVideoAsync(videoSearchResult[0].Id);
             if(!channelList.ContainsKey(foundChannel.Title))
                 channelList.Add(foundChannel.Title, foundChannel.Id);
 
@@ -77,12 +78,18 @@ namespace DiscordNewsBot.Clients
 
         public async Task<string> SearchChannelId(string query)
         {
-            return await _youtubeService.GetChannelIdAsync(query);
+            IReadOnlyList<Video> foundVideo = await _youtubeService.Search.GetVideosAsync(query);
+            foreach (var item in foundVideo)
+            {
+                if (item.Author.Contains(query))
+                    return item.ChannelId;
+            }
+            return "";
         }
 
         public async Task<object> GetLast(string channelId)
         {
-            var videosList = await _youtubeService.GetChannelUploadsAsync(channelId, 1);
+            var videosList = await _youtubeService.Channels.GetUploadsAsync(channelId);
             if (videosList.Count <= 0) return null;
             var uploadDelta = DateTime.Now - videosList[0].UploadDate;
             return uploadDelta.Days < 1 && uploadDelta.Hours < SettingsManager.Config.TimeToNotRelevant ? videosList[0] : null;
