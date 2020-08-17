@@ -6,6 +6,7 @@ using System;
 using System.Threading.Tasks;
 using DiscordNewsBot.Config;
 using DSharpPlus.Interactivity;
+using DiscordBotsList.Api;
 
 namespace DiscordNewsBot
 {
@@ -30,6 +31,11 @@ namespace DiscordNewsBot
         /// DSharPLusComandsModule
         /// </summary>
         private static CommandsNextModule _commands;
+
+        /// <summary>
+        /// Discord bot list API integration
+        /// </summary>
+        private static AuthDiscordBotListApi DblApi;
 
         /// <summary>
         /// App tag for logging
@@ -63,13 +69,19 @@ namespace DiscordNewsBot
                 UseInternalLogHandler = true,
                 LogLevel = LogLevel.Info
             });
-            
+            DblApi = new AuthDiscordBotListApi(683421360352919599, SettingsManager.Config.TopGgToken);
+
             Discord.MessageCreated += async e =>
             {
                 if (e.Message.Content.ToLower().StartsWith(SettingsManager.Config.CommandPrefix))
                 {
                     await Discord.UpdateStatusAsync(null, DSharpPlus.Entities.UserStatus.Online);
                 }
+            };
+            Discord.Heartbeated += async e =>
+            {
+                var me = await DblApi.GetMeAsync();
+                await me.UpdateStatsAsync(Discord.Guilds.Count);
             };
             _commands = Discord.UseCommandsNext(new CommandsNextConfiguration
             {
@@ -84,8 +96,8 @@ namespace DiscordNewsBot
                 // default pagination timeout to 5 minutes
                 PaginationTimeout = TimeSpan.FromMinutes(5),
 
-                // default timeout for other actions to 2 minutes
-                Timeout = TimeSpan.FromMinutes(2)
+                // default timeout for other actions to 1 minute
+                Timeout = TimeSpan.FromMinutes(1)
             });
          
             _commands.RegisterCommands<MainCommands>();

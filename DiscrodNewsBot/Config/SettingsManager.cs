@@ -28,6 +28,10 @@ namespace DiscordNewsBot.Config
         /// </summary>
         public string Token { get; set; }
         /// <summary>
+        /// DiscordBotsList token
+        /// </summary>
+        public string TopGgToken { get; set; }
+        /// <summary>
         /// Maximum time when any observing service information is relevant
         /// </summary>
         public int TimeToNotRelevant { get; set; }

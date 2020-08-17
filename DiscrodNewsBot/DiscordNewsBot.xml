@@ -103,6 +103,11 @@
             Discord token to access bot app
             </summary>
         </member>
+        <member name="P:DiscordNewsBot.Config.SettingsManager.TopGgToken">
+            <summary>
+            DiscordBotsList token
+            </summary>
+        </member>
         <member name="P:DiscordNewsBot.Config.SettingsManager.TimeToNotRelevant">
             <summary>
             Maximum time when any observing service information is relevant
@@ -230,6 +235,11 @@
         <member name="F:DiscordNewsBot.Program._commands">
             <summary>
             DSharPLusComandsModule
+            </summary>
+        </member>
+        <member name="F:DiscordNewsBot.Program.DblApi">
+            <summary>
+            Discord bot list API integration
             </summary>
         </member>
         <member name="F:DiscordNewsBot.Program.Tag">
