@@ -5,6 +5,7 @@
 [![CodeSize](https://img.shields.io/github/languages/code-size/Geckon01/dNewsBot)]()
 [![CodeFactor](https://www.codefactor.io/repository/github/geckon01/dnewsbot/badge)](https://www.codefactor.io/repository/github/geckon01/dnewsbot)
 
+### ***THIS REPO ISDEPRECATED AND NO LONGER SUPPORTED***
 dNewsBot is a simple dicord bot that notify about some service action. As example, it can notify you about new video on your favoutire youtube blogger channel.
 
 Docs: https://dnews.herebots.com
